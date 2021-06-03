@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDoList from './components/todo-list/ToDo-List';
+import ToDoList from './components/ToDo-List/ToDo-List';
 import './App.css';
 
 function App() {
