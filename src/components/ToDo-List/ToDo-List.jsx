@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTodos } from '../../app/selectors/selectors';
+import { selectTodos } from '../../app/store/selectors/selectors';
 
 import {
   addTodo,
@@ -8,7 +8,7 @@ import {
   toggleTodo,
   deleteTodo,
   clearTodos,
-} from '../../app/actions/actions';
+} from '../../app/store/actions/actions';
 
 export default function ToDoList() {
   const todos = useSelector(selectTodos);
