@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { add, markDone, remove, removeAll, selectTodos } from './ToDoSlice';
+import {
+  add,
+  addAsync,
+  markDone,
+  remove,
+  removeAll,
+  selectTodos,
+} from './ToDoSlice';
 
 export default function ToDoList() {
   const todos = useSelector(selectTodos);
@@ -22,6 +29,14 @@ export default function ToDoList() {
         }}
       >
         Add todo
+      </button>
+      <button
+        onClick={() => {
+          dispatch(addAsync(task));
+          setTask('');
+        }}
+      >
+        Add Async
       </button>
       <button onClick={() => dispatch(removeAll())}>Clear All</button>
       <ul>

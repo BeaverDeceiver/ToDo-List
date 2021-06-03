@@ -1,16 +1,21 @@
-import { /*createAsyncThunk,*/ createSlice } from '@reduxjs/toolkit';
-
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { fetchTodo } from './ToDoAPI';
 const initialState = {
   todoList: [
     { name: 'Manage time', isDone: false },
     { name: 'Add fake async api ', isDone: false },
   ],
+  status: 'idle',
 };
+
+export const addAsync = createAsyncThunk('todos/fetchTodo', async (name) => {
+  const response = await fetchTodo(name);
+  return response.name;
+});
 
 export const todosSlice = createSlice({
   name: 'todos',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     add: (state, action) => {
       if (action.payload !== '')
@@ -38,6 +43,16 @@ export const todosSlice = createSlice({
     removeAll: (state) => {
       state.todoList = [];
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addAsync.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(addAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.todoList.push({ name: action.payload, isDone: false });
+      });
   },
 });
 
