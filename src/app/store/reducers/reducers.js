@@ -1,8 +1,7 @@
-import { combineActions, handleActions } from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 import {
   addTodo,
-  addTodoAsync,
   clearTodos,
   deleteTodo,
   toggleTodo,
